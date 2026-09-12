@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magil Tour | San Andrés</title>
+    <!-- Fuentes de Google: Montserrat (Impacto) y Caveat (Cursiva Playera) -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= VARIABLES DE COLOR (Basadas en tu Instagram) ================= */
+        :root {
+            --azul-profundo: #004e89;
+            --azul-caribe: #00a8e8;
+            --amarillo-boton: #ffbe0b;
+            --blanco: #ffffff;
+            --texto-oscuro: #1d3557;
+        }
+
+        /* ================= RESET Y BASE ================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--texto-oscuro); background-color: #f8f9fa; }
+        h1, h2, h3 { text-transform: uppercase; }
+        .cursiva { font-family: 'Caveat', cursive; text-transform: none; color: var(--azul-caribe); font-size: 2.5rem; display: block; margin-bottom: -10px; }
+        
+        /* ================= BOTONES ================= */
+        .btn {
+            background-color: var(--amarillo-boton); color: #000; font-weight: 900;
+            padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer;
+            text-transform: uppercase; font-size: 1rem; transition: all 0.3s ease;
+            text-decoration: none; display: inline-block; box-shadow: 0 4px 15px rgba(255, 190, 11, 0.4);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 190, 11, 0.6); }
+
+        /* ================= NAVEGACIÓN (Glassmorphism) ================= */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+            z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo { font-size: 1.8rem; font-weight: 900; color: var(--azul-profundo); }
+        .logo span { color: var(--azul-caribe); }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 78, 137, 0.5), rgba(0, 168, 232, 0.4)), url('https://images.unsplash.com/photo-1590418606746-018840f9cd0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: var(--blanco); padding: 0 20px; position: relative;
+        }
+        .hero h1 { font-size: 4.5rem; font-weight: 900; line-height: 1; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero .cursiva { color: var(--blanco); font-size: 3.5rem; margin-bottom: 10px; }
+
+        /* ================= WIDGET DE RESERVA RÁPIDA ================= */
+        .booking-widget {
+            background: var(--blanco); padding: 15px; border-radius: 50px;
+            display: flex; gap: 15px; margin-top: 40px; align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); flex-wrap: wrap; justify-content: center;
+        }
+        .booking-widget select, .booking-widget input {
+            padding: 12px 20px; border: 1px solid #ddd; border-radius: 30px;
+            font-family: inherit; font-size: 1rem; outline: none;
+        }
+
+        /* ================= BENTO GRID (TOURS) ================= */
+        .tours-section { padding: 80px 5%; max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--azul-profundo); margin-bottom: 40px; }
+        
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 250px; gap: 20px;
+        }
+        .bento-item {
+            position: relative; border-radius: 20px; overflow: hidden;
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+            color: var(--blanco); transition: transform 0.3s; text-decoration: none;
+        }
+        .bento-item::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 1;
+        }
+        .bento-item:hover { transform: scale(1.02); }
+        .bento-content { position: relative; z-index: 2; }
+        .bento-content h3 { font-size: 1.5rem; margin-bottom: 5px; }
+        
+        /* Tamaños Bento */
+        .item-1 { grid-column: span 2; grid-row: span 2; background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .item-2 { grid-column: span 2; background-image: url('https://images.unsplash.com/photo-1544552866-d3ed42536fcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .item-3 { grid-column: span 1; background-image: url('https://images.unsplash.com/photo-1563299796-b729d0af2df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'); }
+        .item-4 { grid-column: span 1; background-image: url('https://images.unsplash.com/photo-1469145617830-22c6c039dbbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'); }
+
+        .price-tag { background: var(--amarillo-boton); color: #000; padding: 5px 10px; border-radius: 10px; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-top: 10px; }
+
+        /* ================= SECCIÓN CÓMO PAGAR ================= */
+        .how-to-book { background-color: var(--azul-profundo); color: var(--blanco); padding: 80px 5%; text-align: center; }
+        .how-to-book h2 { color: var(--blanco); margin-bottom: 50px; font-size: 2.2rem; }
+        .steps-container { display: flex; justify-content: space-around; max-width: 1000px; margin: auto; gap: 30px; position: relative; }
+        
+        .step { flex: 1; z-index: 2; }
+        .step-icon {
+            width: 80px; height: 80px; background: var(--azul-caribe); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; margin: 0 auto 20px;
+            font-size: 2rem; color: var(--blanco); box-shadow: 0 0 0 10px rgba(0, 168, 232, 0.2);
+        }
+        .step h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--amarillo-boton); }
+        .step p { font-size: 0.95rem; line-height: 1.5; opacity: 0.9; }
+
+        .trust-badge {
+            margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px;
+            display: inline-block; border: 1px dashed rgba(255,255,255,0.5);
+        }
+
+        /* ================= WHATSAPP FLOTANTE ================= */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100; transition: transform 0.3s; text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* ================= FOOTER ================= */
+        footer { background: #111; color: white; text-align: center; padding: 30px 20px; }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero .cursiva { font-size: 2.5rem; }
+            .booking-widget { border-radius: 20px; flex-direction: column; width: 90%; }
+            .booking-widget select, .booking-widget input, .booking-widget .btn { width: 100%; }
+            .bento-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+            .item-1, .item-2, .item-3, .item-4 { grid-column: span 1; }
+            .item-1 { grid-row: span 2; }
+            .steps-container { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav>
+        <div class="logo">MAGIL <span>TOUR</span></div>
+        <a href="#tours" class="btn">RESERVAR YA</a>
+    </nav>
+
+    <!-- Sección Principal (Hero) -->
+    <header class="hero">
+        <span class="cursiva">Explora San Andrés</span>
+        <h1>Vive el mar<br>como nunca</h1>
+        
+        <!-- Buscador / Filtro rápido -->
+        <div class="booking-widget">
+            <select id="tour-select">
+                <option value="">¿Qué quieres hacer?</option>
+                <option value="ponton">Alquiler de Pontón</option>
+                <option value="buceo">Buceo / Acuanautas</option>
+                <option value="chiva">Chiva Rumbera</option>
+                <option value="motos">Motos Eléctricas</option>
+            </select>
+            <input type="date" id="date-select">
+            <input type="number" placeholder="N° de Personas" min="1">
+            <button class="btn" onclick="buscarTour()">BUSCAR AVENTURA</button>
+        </div>
+    </header>
+
+    <!-- Sección de Tours (Bento Grid) -->
+    <section class="tours-section" id="tours">
+        <span class="cursiva" style="text-align: center;">Nuestros Servicios</span>
+        <h2 class="section-title">ELIGE TU PRÓXIMA AVENTURA</h2>
+        
+        <div class="bento-grid">
+            <!-- Item 1 (Destacado) -->
+            <a href="#" class="bento-item item-1" onclick="abrirReserva('Pontón')">
+                <div class="bento-content">
+                    <h3>🛥️ Pontón Exclusivo</h3>
+                    <p>Relájate, disfruta y descubre los mejores paisajes del mar de los 7 colores.</p>
+                    <span class="price-tag">Desde $XXX.XXX COP</span>
+                </div>
+            </a>
+            
+            <!-- Item 2 -->
+            <a href="#" class="bento-item item-2" onclick="abrirReserva('Buceo')">
+                <div class="bento-content">
+                    <h3>🤿 Buceo en San Andrés</h3>
+                    <p>Deja tu experiencia en la isla en nuestras manos. Sumérgete.</p>
+                    <span class="price-tag">Reserva 30% Anticipado</span>
+                </div>
+            </a>
+            
+            <!-- Item 3 -->
+            <a href="#" class="bento-item item-3" onclick="abrirReserva('Chiva')">
+                <div class="bento-content">
+                    <h3>🚌 Chiva Rumbera</h3>
+                    <p>Diversión y sabor caribeño.</p>
+                </div>
+            </a>
+            
+            <!-- Item 4 -->
+            <a href="#" class="bento-item item-4" onclick="abrirReserva('Motos')">
+                <div class="bento-content">
+                    <h3>🛵 Moto Eléctrica</h3>
+                    <p>Libertad para explorar a tu ritmo.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección Pago Anticipado (Estrategia de Confianza) -->
+    <section class="how-to-book">
+        <h2>ASEGURA TU CUPO EN 3 SIMPLES PASOS 🌴</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-mouse-pointer"></i></div>
+                <h3>1. ELIGE TU PARCHE</h3>
+                <p>Selecciona tu tour, fecha y hora ideal directamente en nuestra web.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+                <h3>2. PAGA 100% SEGURO</h3>
+                <p>Abona tu reserva por adelantado. Aceptamos PSE, Nequi, Daviplata y Tarjetas.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-ticket-alt"></i></div>
+                <h3>3. RECIBE TU VOUCHER</h3>
+                <p>Tu ticket digital llegará a tu WhatsApp al instante. ¡Cero filas en la isla!</p>
+            </div>
+        </div>
+        
+        <div class="trust-badge">
+            <p>🔒 <strong>Pagos Procesados Seguros.</strong> Tus datos están protegidos.</p>
+            <!-- Aquí irían los logos de PSE, Wompi, ePayco o MercadoPago -->
+            <p style="font-size: 2rem; margin-top: 10px;">💳 🏦 📱</p>
+        </div>
+    </section>
+
+    <!-- Botón Flotante WhatsApp (Usando el número que vi en la imagen) -->
+    <a href="https://wa.me/573022596474?text=Hola%20Magil%20Tour,%20quiero%20reservar%20un%20tour." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Magil Tour San Andrés. Todos los derechos reservados.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">Políticas de Reembolso y Cancelación aplicables.</p>
+    </footer>
+
+    <!-- Script Básico para Interacciones -->
+    <script>
+        function buscarTour() {
+            const tour = document.getElementById('tour-select').value;
+            const date = document.getElementById('date-select').value;
+            
+            if(!tour || !date) {
+                alert("Por favor, selecciona qué quieres hacer y la fecha para buscar tu aventura.");
+            } else {
+                // Aquí conectarías con tu sistema de reservas (Checkout)
+                alert("Redirigiendo a las opciones disponibles para " + tour.toUpperCase() + "...");
+                window.location.hash = "#tours";
+            }
+        }
+
+        function abrirReserva(nombreTour) {
+            // Este evento simula la apertura del carrito de compra o link de pago
+            alert("Has seleccionado: " + nombreTour + ".\n\nAquí se abriría el panel lateral (Checkout) para procesar el pago anticipado con Wompi/MercadoPago.");
+        }
+    </script>
+</body>
+</html>
